@@ -1,2 +1,2 @@
-# giovannafofa
+# astheric
 repositório criado para aprender programação
