@@ -105,5 +105,167 @@ Gele: Distribua o creme em potinhos individuais e leve à geladeira por, pelo me
 4. Asse no micro-ondas: Leve ao micro-ondas em potência alta por cerca de 1 minuto e 30 segundos a 2 minutos (o tempo pode variar um pouco dependendo da potência do seu aparelho).
 </P>
 <img class = "rosa" src = "maça e canela.html"
+    <!-- Link interativo para tabelas nutricionais -->
+<style>
+#tabelas-nutrikids {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#tabelas-nutrikids summary {
+    display: inline-block;
+    cursor: pointer;
+    color: #397747;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#tabelas-nutrikids select {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#tabelas-nutrikids table {
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#tabelas-nutrikids th,
+#tabelas-nutrikids td {
+    padding: 9px;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabelas-nutrikids th:last-child,
+#tabelas-nutrikids td:last-child {
+    text-align: right;
+}
+</style>
+
+<div id="tabelas-nutrikids">
+    <details>
+        <summary>Consultar tabela nutricional das receitas</summary>
+
+        <select id="receita-nutrikids">
+            <option value="panqueca">Panqueca saudável de aveia e banana</option>
+            <option value="cookies">Cookies de aveia com gotas de chocolate</option>
+            <option value="danoninho">Danoninho caseiro saudável</option>
+            <option value="sorvete">Sorvete de banana e cacau</option>
+            <option value="muffin">Muffin de maçã e canela de caneca</option>
+        </select>
+
+        <h3 id="titulo-tabela-nutrikids"></h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Informação nutricional</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody id="dados-tabela-nutrikids"></tbody>
+        </table>
+
+        <p style="font-size: 12px; color: #777;">
+            Os valores nutricionais devem ser calculados conforme os
+            ingredientes e a porção de cada receita.
+        </p>
+    </details>
+</div>
+
+<script>
+const receitasNutrikids = {
+    panqueca: {
+        nome: "Panqueca saudável de aveia e banana",
+        dados: [
+            ["Calorias", "A calcular"],
+            ["Carboidratos", "A calcular"],
+            ["Proteínas", "A calcular"],
+            ["Gorduras totais", "A calcular"],
+            ["Fibras", "A calcular"]
+        ]
+    },
+    cookies: {
+        nome: "Cookies de aveia com gotas de chocolate",
+        dados: [
+            ["Calorias", "A calcular"],
+            ["Carboidratos", "A calcular"],
+            ["Proteínas", "A calcular"],
+            ["Gorduras totais", "A calcular"],
+            ["Fibras", "A calcular"]
+        ]
+    },
+    danoninho: {
+        nome: "Danoninho caseiro saudável",
+        dados: [
+            ["Calorias", "A calcular"],
+            ["Carboidratos", "A calcular"],
+            ["Proteínas", "A calcular"],
+            ["Gorduras totais", "A calcular"],
+            ["Fibras", "A calcular"]
+        ]
+    },
+    sorvete: {
+        nome: "Sorvete de banana e cacau",
+        dados: [
+            ["Calorias", "A calcular"],
+            ["Carboidratos", "A calcular"],
+            ["Proteínas", "A calcular"],
+            ["Gorduras totais", "A calcular"],
+            ["Fibras", "A calcular"]
+        ]
+    },
+    muffin: {
+        nome: "Muffin de maçã e canela de caneca",
+        dados: [
+            ["Calorias", "A calcular"],
+            ["Carboidratos", "A calcular"],
+            ["Proteínas", "A calcular"],
+            ["Gorduras totais", "A calcular"],
+            ["Fibras", "A calcular"]
+        ]
+    }
+};
+
+const seletorNutrikids = document.getElementById("receita-nutrikids");
+
+function atualizarTabelaNutrikids() {
+    const receita = receitasNutrikids[seletorNutrikids.value];
+
+    document.getElementById("titulo-tabela-nutrikids").textContent =
+        receita.nome;
+
+    const corpo = document.getElementById("dados-tabela-nutrikids");
+    corpo.replaceChildren();
+
+    receita.dados.forEach(([nome, quantidade]) => {
+        const linha = document.createElement("tr");
+        const celulaNome = document.createElement("td");
+        const celulaQuantidade = document.createElement("td");
+
+        celulaNome.textContent = nome;
+        celulaQuantidade.textContent = quantidade;
+
+        linha.append(celulaNome, celulaQuantidade);
+        corpo.appendChild(linha);
+    });
+}
+
+seletorNutrikids.addEventListener("change", atualizarTabelaNutrikids);
+atualizarTabelaNutrikids();
+</script>
+
 </body>
 </html>
