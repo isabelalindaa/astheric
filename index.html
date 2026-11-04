@@ -3,63 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriKids - Receitas Nutritivas</title>
+    <title>NutriKids - Lanches & Receitas Nutritivas</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header class="header">
-        <div class="logo">NutriKids</div>
-        <p class="subtitle">Receitas nutritivas e deliciosas para o lanche das crianças, unindo saúde, cor e sabor em cada mordida.</p>
-    </header>
-
-    <main class="container">
-        
-        <!-- Receita 1 -->
-        <article class="card">
-            <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" alt="Panqueca de Aveia e Banana">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">Nutri<span>Kids</span></span>
             </div>
-            <div class="card-content">
-                <span class="tag">Café & Lanche</span>
-                <h3>Panqueca Saudável de Aveia e Banana</h3>
-                
-                <div class="section-title">Ingredientes</div>
-                <ul class="ingredients-list">
-                    <li>1 banana madura (quanto mais madura, mais docinha)</li>
-                    <li>1 ovo</li>
-                    <li>1 pitada de canela em pó (opcional)</li>
-                    <li>Fio de azeite ou óleo de coco para untar</li>
-                </ul>
-
-                <div class="section-title">Modo de preparo</div>
-                <ol class="prep-list">
-                    <li><strong>Amasse a banana:</strong> Em um prato fundo, amasse bem a banana com um garfo até virar um purê.</li>
-                    <li><strong>Misture os ingredientes:</strong> Adicione o ovo e bata bem com o garfo. Em seguida, acrescente a aveia e a canela, misturando até formar uma massa homogênea.</li>
-                    <li><strong>Aqueça a frigideira:</strong> Leve uma frigideira antiaderente ao fogo baixo e unte com um pouquinho de azeite ou óleo de coco.</li>
-                    <li><strong>Grelhe a massa:</strong> Despeje a massa na frigideira. Quando começarem a aparecer pequenas bolhas e a base estiver dourada, vire com uma espátula.</li>
-                    <li><strong>Finalize:</strong> Deixe dourar do outro lado por mais um minuto.</li>
-                </ol>
-
-                <div class="dica">
-                    <strong>Dica de ouro:</strong> Sirva com frutas picadas por cima (como morango ou mirtilo), um fio de mel ou uma colher de pasta de amendoim integral.
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Buscar receita ou ingrediente..." onkeyup="filterRecipes()">
                 </div>
             </div>
-        </article>
+        </div>
+    </header>
 
-        <!-- Receita 2 -->
-        <article class="card">
-            <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80" alt="Cookies de Aveia">
-            </div>
-            <div class="card-content">
-                <span class="tag">Snack</span>
-                <h3>Cookies de Aveia com Gotas de Chocolate</h3>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Receitas de Verdade</span>
+            <h1>Saúde, cor e sabor em cada <em>mordida</em>.</h1>
+            <p>Opções nutritivas, simples e prazerosas para preparar junto com as crianças e transformar a rotina do lanche escolar.</p>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <div class="filters-bar">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Todas</button>
+        <button class="filter-btn" onclick="setCategory('panqueca', this)">Panquecas</button>
+        <button class="filter-btn" onclick="setCategory('cookies', this)">Cookies</button>
+        <button class="filter-btn" onclick="setCategory('danoninho', this)">Sobremesas</button>
+        <button class="filter-btn" onclick="setCategory('sorvete', this)">Gelados</button>
+        <button class="filter-btn" onclick="setCategory('muffin', this)">Rápidas</button>
+    </div>
+
+    <!-- Main Container / Recipe Grid -->
+    <main class="main-container">
+        <div class="recipes-grid" id="recipesGrid">
+
+            <!-- Receita 1: Panqueca -->
+            <article class="recipe-card" data-category="panqueca" data-name="panqueca saudável aveia banana">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=900&q=80" alt="Panqueca Saudável de Aveia e Banana">
+                    <span class="category-tag">Café & Lanche</span>
+                </div>
+                <div class="card-body">
+                    <h2>Panqueca Saudável de Aveia e Banana</h2>
+                    <p class="recipe-desc">Deliciosa, naturalmente doce e macia. Uma opção perfeita para o café da manhã ou lanche da tarde.</p>
+                    
+                    <div class="recipe-meta">
+                        <span>⏱️ 15 min</span>
+                        <span>🔥 Fácil</span>
+                        <span>🍌 Sem Açúcar</span>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Ingredientes</h4>
+                        <ul>
+                            <li>1 banana madura (quanto mais madura, mais docinha fica)</li>
+                            <li>1 ovo</li>
+                            <li>2 colheres de sopa de aveia em flocos ou farinha</li>
+                            <li>1 pitada de canela em pó (opcional)</li>
+                            <li>Fio de azeite ou óleo de coco para untar a frigideira</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Modo de preparo</h4>
+                        <ol>
+                            <li><strong>Amasse a banana:</strong> Em um prato fundo, amasse bem a banana com um garfo até virar um purê homogêneo.</li>
+                            <li><strong>Misture os ingredientes:</strong> Adicione o ovo e bata bem. Em seguida, acrescente a aveia e a canela, misturando até formar uma massa bem leve.</li>
+                            <li><strong>Aqueça a frigideira:</strong> Leve uma frigideira antiaderente ao fogo baixo e unte com um fio de azeite ou óleo de coco.</li>
+                            <li><strong>Grelhe a massa:</strong> Despeje a massa na frigideira em pequenas porções. Quando surgirem bolhas e a base estiver dourada, vire com cuidado.</li>
+                            <li><strong>Finalize:</strong> Deixe dourar por mais 1 minuto do outro lado e sirva morninho.</li>
+                        </ol>
+                    </div>
+
+                    <div class="golden-tip">
+                        <strong>✨ Dica de Ouro:</strong> Sirva com frutas frescas picadas (morango, mirtilo), um fio de mel puro ou uma colher de pasta de amendoim 100% integral.
+                    </div>
+                </div>
+            </article>
+
+            <!-- Receita 2: Cookies -->
+            <article class="recipe-card" data-category="cookies" data-name="cookies aveia gotas chocolate">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80" alt="Cookies de Aveia com Gotas de Chocolate">
+                    <span class="category-tag">Crocante</span>
+                </div>
+                <div class="card-body">
+                    <h2>Cookies de Aveia com Gotas de Chocolate</h2>
+                    <p class="recipe-desc">Crocantes por fora e macios por dentro, usando apenas a doçura natural da banana e cacau nobre.</p>
+                    
+                    <div class="recipe-meta">
+                        <span>⏱️ 25 min</span>
+                        <span>🔥 Forno</span>
+                        <span>🍫 Cacau 70%</span>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Ingredientes</h4>
+                        <ul>
+                            <li>2 bananas grandes bem maduras</li>
+                            <li>1 xícara de aveia em flocos</li>
+                            <li>3 colheres de sopa de gotas de chocolate amargo (ou 70% picadinho)</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Modo de preparo</h4>
+                        <ol>
+                            <li>Em uma tigela ampla, amasse as bananas maduras com um garfo até obter uma consistência pastosa.</li>
+                            <li>Adicione a aveia em flocos e misture bem até que a aveia absorva a umidade da banana.</li>
+                            <li>Incorpore delicadamente as gotas de chocolate à massa.</li>
+                            <li>Com uma colher, molde pequenas porções e disponha em assadeira forrada com papel manteiga.</li>
+                            <li>Asse em forno preaquecido a 180°C por 15 a 20 minutos até dourar a base. Deixe esfriar para firmar.</li>
+                        </ol>
+                    </div>
+
+                    <div class="golden-tip">
+                        <strong>✨ Dica Especial:</strong> Você pode variar adicionando uma pitada de canela, nozes picadinhas ou uvas-passas.
+                    </div>
+                </div>
+            </article>
+
+            <!-- Receita 3: Danoninho -->
+            <article class="recipe-card" data-category="danoninho" data-name="danoninho caseiro saudável morango inhame">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&w=900&q=80" alt="Danoninho Caseiro Saudável">
+                    <span class="category-tag">Cremoso</span>
+                </div>
+                <div class="card-body">
+                    <h2>Danoninho Caseiro Saudável</h2>
+                    <p class="recipe-desc">A versão sem corantes e sem conservantes do clássico infantil, rica em fibras e vitaminas.</p>
+                    
+                    <div class="recipe-meta">
+                        <span>⏱️ 10 min (+2h geladeira)</span>
+                        <span>🍓 100% Natural</span>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Ingredientes</h4>
+                        <ul>
+                            <li>200g de morango congelado</li>
+                            <li>2 bananas maduras</li>
+                            <li>1 inhame médio descascado e picado</li>
+                            <li>1 colher de sopa de suco de limão fresco</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Modo de preparo</h4>
+                        <ol>
+                            <li><strong>Cozinhe o inhame:</strong> Cozinhe os cubos de inhame em água fervente até que fiquem bem macios ao espeta-los com o garfo. Escorra e espere amornar.</li>
+                            <li><strong>Bata os ingredientes:</strong> No liquidificador ou processador, coloque o inhame cozido, os morangos congelados, as bananas e o suco de limão.</li>
+                            <li><strong>Obtenha a textura:</strong> Bata muito bem por 3 a 5 minutos até obter um creme veludoso, rosado e uniforme.</li>
+                            <li><strong>Refrigere:</strong> Distribua em potinhos de vidro e leve à geladeira por no mínimo 2 horas antes de servir.</li>
+                        </ol>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Receita 4: Sorvete -->
+            <article class="recipe-card" data-category="sorvete" data-name="sorvete banana cacau saudável">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80" alt="Sorvete de Banana e Cacau">
+                    <span class="category-tag">Refrescante</span>
+                </div>
+                <div class="card-body">
+                    <h2>Sorvete de Banana e Cacau</h2>
+                    <p class="recipe-desc">Textura cremosa surreal com apenas 2 ingredientes base. Sem açúcar adicionado!</p>
+                    
+                    <div class="recipe-meta">
+                        <span>⏱️ 5 min</span>
+                        <span>❄️ Congelado</span>
+                        <span>⚡ Ultra Rápido</span>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Ingredientes</h4>
+                        <ul>
+                            <li>4 bananas maduras (quanto mais maduras, mais doce)</li>
+                            <li>2 colheres de sopa de cacau em pó 100%</li>
+                            <li>1 colher de chá de extrato de baunilha (opcional)</li>
+                            <li>1 a 2 colheres de sopa de leite (vegetal ou integral) se necessário</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Modo de preparo</h4>
+                        <ol>
+                            <li><strong>Prepare as bananas:</strong> Descasque as bananas, corte em rodelas e congele em pote fechado por no mínimo 4 horas.</li>
+                            <li><strong>Bata no processador:</strong> Coloque as rodelas congeladas no processador ou liquidificador potente.</li>
+                            <li><strong>Saborize:</strong> Conforme o creme for se formando, adicione o cacau em pó e o extrato de baunilha.</li>
+                            <li><strong>Ponto perfeito:</strong> Se o aparelho sentir dificuldade, ponha 1 colher de leite para ajudar nas lâminas. Bata até virar um sorvete de máquina super aveludado.</li>
+                        </ol>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Receita 5: Muffin -->
+            <article class="recipe-card" data-category="muffin" data-name="muffin maçã canela caneca microondas">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80" alt="Muffins de Maçã e Canela de Caneca">
+                    <span class="category-tag">Prático</span>
+                </div>
+                <div class="card-body">
+                    <h2>Muffins de Maçã e Canela de Caneca</h2>
+                    <p class="recipe-desc">Prontinho em 2 minutos no micro-ondas. Um bolinho quentinho e perfumado para dias ágeis.</p>
+                    
+                    <div class="recipe-meta">
+                        <span>⏱️ 3 min</span>
+                        <span>☕ Caneca</span>
+                        <span>🍎 Maçã & Canela</span>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Ingredientes</h4>
+                        <ul>
+                            <li>1/2 maçã pequena picada em cubinhos bem pequenos</li>
+                            <li>1 ovo</li>
+                            <li>2 colheres de sopa de farelo ou farinha de aveia</li>
+                            <li>1 colher de sopa de mel ou açúcar mascavo</li>
+                            <li>1 colher de chá de óleo de coco (ou manteiga derretida)</li>
+                            <li>1 pitada de canela em pó</li>
+                            <li>1/2 colher de chá de fermento em pó</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h4>Modo de preparo</h4>
+                        <ol>
+                            <li><strong>Líquidos:</strong> Na própria caneca, bata o ovo com um garfo. Misture o óleo de coco e o mel.</li>
+                            <li><strong>Secos:</strong> Adicione a aveia e a canela, misturando até ficar homogêneo.</li>
+                            <li><strong>Fruta e fermento:</strong> Adicione os cubos de maçã e o fermento, mexendo bem delicadamente.</li>
+                            <li><strong>Asse:</strong> Leve ao micro-ondas em potência alta por 1 min 30 s a 2 min. Sirva morno!</li>
+                        </ol>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Nutritional Table Section -->
+        <section class="nutrition-section" id="tabelas-nutrikids">
+            <div class="nutrition-card">
+                <div class="nutrition-header">
+                    <span class="nutrition-badge">Informação Nutricional</span>
+                    <h3>Consulte a tabela das receitas</h3>
+                    <p>Selecione a receita desejada abaixo para verificar o perfil nutricional estimado.</p>
+                </div>
+
+                <div class="nutrition-controls">
+                    <select id="receita-nutrikids" onchange="atualizarTabelaNutrikids()">
+                        <option value="panqueca">Panqueca saudável de aveia e banana</option>
+                        <option value="cookies">Cookies de aveia com gotas de chocolate</option>
+                        <option value="danoninho">Danoninho caseiro saudável</option>
+                        <option value="sorvete">Sorvete de banana e cacau</option>
+                        <option value="muffin">Muffin de maçã e canela de caneca</option>
+                    </select>
+                </div>
+
+                <div class="nutrition-table-wrapper">
+                    <h4 id="titulo-tabela-nutrikids">Panqueca saudável de aveia e banana</h4>
+                    <table class="nutrition-table">
+                        <thead>
+                            <tr>
+                                <th>Componente Nutricional</th>
+                                <th style="text-align: right;">Quantidade / Porção</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dados-tabela-nutrikids">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
                 
-                <div class="section-title">Ingredientes</div>
-                <ul class="ingredients-list">
-                    <li>2 bananas grandes bem maduras</li>
-                    <li>1 xícara de aveia em flocos</li>
+                <p class="nutrition-footer">
+                    * Os valores exatos podem variar ligeiramente conforme as marcas dos ingredientes utilizados.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© NutriKids - Alimentação consciente, afetuosa e saborosa para o crescimento forte dos pequenos.</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script>
+        const receitasNutrikids = {
+            panqueca: {
+                nome: "Panqueca saudável de aveia e banana",
+                dados: [
+                    ["Calorias (kcal)", "185 kcal"],
+                    ["Carboidratos", "28 g"],
+                    ["Proteínas", "7.5 g"],
+                    ["Gorduras totais", "4.8 g"],
+                    ["Fibras alimentares", "4.2 g"]
+                ]
+            },
+            cookies: {
+                nome: "Cookies de aveia com gotas de chocolate",
+                dados: [
+                    ["Calorias (unidade)", "95 kcal"],
+                    ["Carboidratos", "16 g"],
+                    ["Proteínas", "2.8 g"],
+                    ["Gorduras totais", "2.5 g"],
+                    ["Fibras alimentares", "2.1 g"]
+                ]
+            },
+            danoninho: {
+                nome: "Danoninho caseiro saudável",
+                dados: [
+                    ["Calorias (porção 100g)", "110 kcal"],
+                    ["Carboidratos", "22 g"],
+                    ["Proteínas", "2.1 g"],
+                    ["Gorduras totais", "0.8 g"],
+                    ["Fibras alimentares", "3.5 g"]
+                ]
+            },
+            sorvete: {
+                nome: "Sorvete de banana e cacau",
+                dados: [
+                    ["Calorias (porção)", "130 kcal"],
+                    ["Carboidratos", "29 g"],
+                    ["Proteínas", "3.0 g"],
+                    ["Gorduras totais", "1.2 g"],
+                    ["Fibras alimentares", "4.8 g"]
+                ]
+            },
+            muffin: {
+                nome: "Muffin de maçã e canela de caneca",
+                dados: [
+                    ["Calorias (unidade)", "190 kcal"],
+                    ["Carboidratos", "31 g"],
+                    ["Proteínas", "6.8 g"],
+                    ["Gorduras totais", "4.5 g"],
+                    ["Fibras alimentares", "3.9 g"]
+                ]
+            }
+        };
+
+        function atualizarTabelaNutrikids() {
+            const select = document.getElementById("receita-nutrikids");
+            const receita = receitasNutrikids[select.value];
+
+            document.getElementById("titulo-tabela-nutrikids").textContent = receita.nome;
+
+            const corpo = document.getElementById("dados-tabela-nutrikids");
+            corpo.replaceChildren();
+
+            receita.dados.forEach(([nome, quantidade]) => {
+                const linha = document.createElement("tr");
+                const celulaNome = document.createElement("td");
+                const celulaQuantidade = document.createElement("td");
+
+                celulaNome.textContent = nome;
+                celulaQuantidade.textContent = quantidade;
+                celulaQuantidade.style.textAlign = "right";
+                celulaQuantidade.style.fontWeight = "600";
+
+                linha.append(celulaNome, celulaQuantidade);
+                corpo.appendChild(linha);
+            });
+        }
+
+        function filterRecipes() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.recipe-card');
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name.includes(searchVal)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function setCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.recipe-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Inicializar tabela nutricional
+        atualizarTabelaNutrikids();
+    </script>
+</body>
+</html>
