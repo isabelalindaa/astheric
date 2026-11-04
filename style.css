@@ -1,8 +1,174 @@
-body{
-    background-color: burlywood;
+/* Resets básicos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-h1{
-    color: pink;
-    font-style: italic;
+
+/* Fundo Off-White */
+body {
+    background-color: #faf8f5;
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
 }
-.amarelo{width: 50%;}
+
+/* Header */
+.header {
+    text-align: center;
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #397747;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 1.1rem;
+    color: #666666;
+    font-weight: 400;
+}
+
+/* Layout Geral */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Cartões de Receitas */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+@media (min-width: 640px) {
+    .card {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-content h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.card-content p {
+    margin-bottom: 8px;
+}
+
+.card-content ul, 
+.card-content ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.card-content li {
+    margin-bottom: 4px;
+}
+
+.dica {
+    background-color: #f4f8f5;
+    border-left: 4px solid #397747;
+    padding: 10px 12px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* Padronização das Imagens */
+.card-img {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .card-img {
+        width: 220px;
+    }
+}
+
+.card-img img {
+    width: 100%;
+    height: 200px; /* Tamanho fixo e uniforme */
+    object-fit: cover; /* Recorta suavemente mantendo a proporção */
+    border-radius: 10px;
+    display: block;
+}
+
+/* Seção Tabela Nutricional */
+#tabelas-nutrikids {
+    background-color: #ffffff;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+#tabelas-nutrikids summary {
+    cursor: pointer;
+    color: #397747;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px;
+}
+
+#tabelas-nutrikids select {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    outline: none;
+    background-color: #faf8f5;
+}
+
+#tabelas-nutrikids h3 {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+#tabelas-nutrikids table {
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#tabelas-nutrikids th,
+#tabelas-nutrikids td {
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#tabelas-nutrikids th:last-child,
+#tabelas-nutrikids td:last-child {
+    text-align: right;
+}
+
+.nota-tabela {
+    font-size: 12px;
+    color: #777777;
+    margin-top: 10px;
+}
